@@ -3,9 +3,7 @@ package com.project1.quizApp.controller;
 import com.project1.quizApp.Question;
 import com.project1.quizApp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,5 +15,19 @@ public class QuestionController {
     @GetMapping("allQuestions")
     public List<Question> getAllQuestions(){
         return questionService.getAllQuestions();
+    }
+    @GetMapping("category/{category}")
+    public List<Question> getQuestionByCategory(@PathVariable String category){
+        return questionService.getQuestionsByCategory(category);
+    }
+
+    @PostMapping("add")
+    public String addQuestion(@RequestBody Question question){
+        return questionService.addQuestion(question);
+    }
+
+    @DeleteMapping("delete/{id}")
+    public String deleteQuestion(@PathVariable String id){
+        return questionService.deleteQuestionById(id);
     }
 }
